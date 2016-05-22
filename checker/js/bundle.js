@@ -119,7 +119,7 @@
 	  });
 
 	  if(tasks.isCompleted()) {
-	    tasksDiv.appendChild(completedTemplate);
+	    tasksDiv.appendChild(completedTemplate());
 	  }
 	};
 
