@@ -1,0 +1,42 @@
+.editor {
+  width: 800px;
+  height: 600px;
+  /*position: absolute;
+  top: 0px;
+  left: 0px;*/
+
+  float: left;
+
+  font-size: 24px;
+}
+
+.guard-message {
+  color: #f00;
+  font-size: 24px;
+  font-family: georgia, serif;
+}
+
+.tasks {
+  margin: 8px;
+}
+.task {
+  font-size: 24px;
+  padding: 4px;
+  font-family: georgia, serif;
+}
+
+.task_state_created {
+  color: #000;
+}
+
+.task_state_current {
+  color: #5C7DB9;
+}
+
+.task_state_accepted {
+  color: #77B95C;
+}
+
+.task_state_rejected {
+  color: #B95C5D;
+}
