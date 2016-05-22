@@ -14,8 +14,6 @@
   "devDependencies": {
     "brace": "^0.8.0",
     "chai": "^3.5.0",
-    "childprocess": "^2.0.1",
-    "localeval": "^15.2.3",
     "mocha": "^2.4.5"
   }
 }
