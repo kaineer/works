@@ -1,0 +1,15 @@
+* Checker
+** TODO AST library (find, check, use)
+*** DONE Esprima.org
+*** DONE Checked
+** DONE Task model and collection
+*** DONE Task model
+*** DONE Tasks collection
+** DONE Check for infinite loop
+** DONE Routine checks
+** DONE Setup webpack
+** TODO Code execution
+** DONE Minimal task checking system markup
+** DONE ACE (use)
+** TODO More acceptable styles
+** TODO Check for polyfills
