@@ -88,6 +88,10 @@ describe("Tasks", function() {
       it("should have no current task", function() {
         expect(tasks.currentTask).to.eq(null);
       });
+
+      it("should not throw error when running check again", function() {
+        expect(tasks.check.bind(tasks)).to.not.throw(Error);
+      });
     });
   });
 
@@ -113,7 +117,7 @@ describe("Tasks", function() {
         completed: false,
         tasks: [
           {
-            state: Task.STATE_CREATED,
+            state: Task.STATE_CURRENT,
             name: taskName
           }
         ]
