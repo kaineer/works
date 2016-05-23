@@ -215,7 +215,13 @@
 	    return this.tasks.length;
 	  },
 	  check: function(code) {
-	    var checkResult = this.currentTask.check(code);
+	    var checkResult;
+
+	    if(this.currentTask) {
+	      checkResult = this.currentTask.check(code);
+	    } else {
+	      return false;
+	    }
 
 	    if(checkResult) {
 	      this.currentTaskIndex += 1;
