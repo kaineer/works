@@ -9,13 +9,19 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel-preset-es2015": "^6.9.0",
     "esprima": "^2.7.2"
   },
   "devDependencies": {
+    "babel-core": "^6.9.0",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015-webpack": "^6.4.1",
     "brace": "^0.8.0",
     "chai": "^3.5.0",
     "escodegen": "^1.8.0",
     "estraverse": "^4.2.0",
-    "mocha": "^2.4.5"
+    "json-loader": "^0.5.4",
+    "mocha": "^2.4.5",
+    "webpack": "^1.13.1"
   }
 }

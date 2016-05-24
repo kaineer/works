@@ -3,6 +3,7 @@ var Task = require("./lib/task");
 var checks = require("./lib/checks");
 var createTemplate = require("./lib/create_template");
 var guard = require("./lib/guard");
+var sandboxEval = require("./lib/sandbox");
 
 var ace = require('brace');
 require('brace/mode/javascript');
@@ -114,8 +115,9 @@ function limitEval(code, opt_timeoutInMS, fnOnStop) {
 var runCode = function(code) {
   (function() {
     try {
-      limitEval(code, 5000, function() {
-        console.log("Code execution take too long");
+      sandboxEval(code, {
+        timeout: 500,
+        loopTimes: 50
       });
     } catch(err) {
       console.log(err);
