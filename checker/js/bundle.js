@@ -853,6 +853,24 @@
 	  return argCheckResult;
 	};
 
+	var increaseByTwo = function increaseByTwo(node) {
+	  if (assignmentExpression(node, "i", "+=", function (right) {
+	    return literal(right, 2);
+	  })) {
+	    return true;
+	  }
+
+	  if (assignmentExpression(node, "i", "=", function (right) {
+	    return binaryExpression(right, "i", "+", function (right) {
+	      return literal(right, 2);
+	    });
+	  })) {
+	    return true;
+	  }
+
+	  return false;
+	};
+
 	var emptyBlockBody = function emptyBlockBody(node) {
 	  if (node.body.type !== "BlockStatement" || node.body.body.length > 0) {
 	    return false;
@@ -969,9 +987,7 @@
 	    }
 
 	    // for(...;...; i += 2)
-	    if (!assignmentExpression(node.update, "i", "+=", function (right) {
-	      return literal(right, 2);
-	    })) {
+	    if (!increaseByTwo(node.update)) {
 	      return false;
 	    }
 
@@ -1005,9 +1021,7 @@
 	    }
 
 	    // for(...;...; i += 2)
-	    if (!assignmentExpression(node.update, "i", "+=", function (right) {
-	      return literal(right, 2);
-	    })) {
+	    if (!increaseByTwo(node.update)) {
 	      return false;
 	    }
 
