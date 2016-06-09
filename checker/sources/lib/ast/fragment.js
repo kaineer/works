@@ -38,23 +38,50 @@ var getExpression = function(node) {
   return node;
 }
 
-var Fragment = function(sourceOrTree) {
-  this.tree = getTree(sourceOrTree);
+var getVariants = function(sources) {
+  var variants = [];
+
+  for(var i = 0; i < sources.length; i++) {
+    variants.push(getTree(sources[i]));
+  }
+
+  return variants;
+};
+
+var Fragment = function() {
+  this.variants = getVariants(arguments);
+};
+
+Fragment.create = function(variants) {
+  var fragment = new Fragment();
+  fragment.variants = getVariants(variants);
+  return fragment;
 };
 
 extend(Fragment.prototype, {
-  compare: function(node) {
-    var patternNode = this.tree;
+  _compareVariant: function(node, variant, fragments) {
+    var patternNode = variant;
     var isStatement = is.statement(node);
     var isExpression = is.expression(node);
 
     if(isStatement) {
-      patternNode = getStatement(this.tree);
+      patternNode = getStatement(patternNode);
     } else if(isExpression) {
-      patternNode = getExpression(this.tree);
+      patternNode = getExpression(patternNode);
     }
 
-    return compare(node, patternNode);
+    return compare(node, patternNode, fragments);
+  },
+  compare: function(node, fragments) {
+    var variants = this.variants;
+
+    for(var i = 0; i < variants.length; i++) {
+      if(this._compareVariant(node, variants[i], fragments)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 });
 

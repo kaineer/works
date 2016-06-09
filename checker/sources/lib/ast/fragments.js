@@ -4,6 +4,8 @@ var extend = require("./utils.js").extend;
 var is = require("./utils.js").is;
 var Fragment = require("./fragment.js");
 
+var slice = Array.prototype.slice;
+
 var Fragments = function() {
   this.fragments = {};
 };
@@ -15,8 +17,9 @@ extend(Fragments.prototype, {
   has: function(name) {
     return !!this.get(name);
   },
-  add: function(name, pattern) {
-    this.fragments[name] = new Fragment(pattern);
+  add: function(name) {
+    var variants = slice.call(arguments, 1);
+    this.fragments[name] = Fragment.create(variants);
   },
   compare: function(name, source) {
     var fragment = this.fragments[name];

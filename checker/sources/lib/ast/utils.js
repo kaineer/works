@@ -31,7 +31,8 @@ var is = {
   expression: function(node) {
     var nodeType = node.type;
     return nodeType && !is.statement(node) &&
-      nodeType.indexOf("Expression") > -1;
+      (nodeType.indexOf("Expression") > -1 ||
+      nodeType === "Literal");
   }
 };
 
