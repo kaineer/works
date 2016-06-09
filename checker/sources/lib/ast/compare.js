@@ -3,11 +3,13 @@ var utils = require("./utils.js");
 var extend = utils.extend;
 var getTree = utils.getTree;
 
-var visitorKeys = extend({}, estraverse.VisitorKeys, {
+var visitorKeys = estraverse.VisitorKeys;
+
+var additionalKeys = {
   Literal: ["value"],
-  BinaryExpression: ["operator", "left", "right"],
+  BinaryExpression: ["operator"],
   Identifier: ["name"]
-});
+};
 
 var extractFragmentNameFromLiteral = function(patternNode) {
   if(patternNode.type === "Literal" &&
@@ -52,7 +54,7 @@ var compareListOrNodes = function(sourceLN, patternLN, fragments) {
     if(sourceLN === patternLN) {
       return true;
     } else {
-      // console.log(sourceLN + " != " + patternLN);
+      // console.log("Content: " + sourceLN + " != " + patternLN);
       return false;
     }
   }
@@ -64,12 +66,6 @@ var compareNodes = function(sourceNode, patternNode, fragments) {
   var nodeKeys, key, i;
   var fragmentName, fragment;
 
-  // console.log('-------------------------------------------')
-  // console.log(sourceNode);
-  // console.log("---")
-  // console.log(patternNode);
-  // console.log(visitorKeys[sourceType]);
-
   if(fragments) {
     fragmentName = extractFragmentName(patternNode);
     fragment = fragments.get(fragmentName);
@@ -78,7 +74,9 @@ var compareNodes = function(sourceNode, patternNode, fragments) {
   if(fragment) {
     return fragment.compare(sourceNode, fragments);
   } else if(sourceType === patternType) {
-    nodeKeys = visitorKeys[sourceType];
+    nodeKeys = visitorKeys[sourceType].concat(
+      additionalKeys[sourceType] || []
+    );
 
     for(i = 0; i < nodeKeys.length; ++i) {
       key = nodeKeys[i];
@@ -96,11 +94,6 @@ var compareNodes = function(sourceNode, patternNode, fragments) {
 };
 
 var compare = function(source, pattern, fragments) {
-  // console.log('--------------------------------------');
-  // console.log(source);
-  // console.log('---')
-  // console.log(pattern)
-
   if(source === null && pattern === null) {
     return true;
   }
@@ -109,10 +102,6 @@ var compare = function(source, pattern, fragments) {
   var patternTree = getTree(pattern);
 
   var result = compareListOrNodes(sourceTree, patternTree, fragments);
-
-  // if(!result) {
-  //   console.log("failed");
-  // }
 
   return result;
 };
