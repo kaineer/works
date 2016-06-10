@@ -24,6 +24,10 @@ describe("ast/compare", function() {
       expect(compare("  for  (;  ;) {  }", "for(;;){}")).
         to.be.ok;
     });
+
+    it("should not be ok for different unary operators", function() {
+      expect(compare("+i", "-i")).not.to.be.ok;
+    })
   });
 
   context("with fragments", function() {

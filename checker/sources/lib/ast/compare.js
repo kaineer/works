@@ -8,6 +8,7 @@ var visitorKeys = estraverse.VisitorKeys;
 var additionalKeys = {
   Literal: ["value"],
   BinaryExpression: ["operator"],
+  UnaryExpression: ["operator"],
   Identifier: ["name"]
 };
 
@@ -33,28 +34,30 @@ var extractFragmentName = function(patternNode) {
   return fragmentName;
 };
 
+var compareNodeList = function(sourceNodeList, patternNodeList, fragments) {
+  for(var i = 0; i < sourceNodeList.length; ++i) {
+    if(!compareNodes(sourceNodeList[i], patternNodeList[i], fragments)) {
+      return false;
+    }
+  }
 
-var compareListOrNodes = function(sourceLN, patternLN, fragments) {
-  var i;
+  return true;
+};
 
-  if(!sourceLN && !patternLN) {
+var compareListOrNodes = function(sourceListOrNode, patternListOrNode, fragments) {
+  if(!sourceListOrNode && !patternListOrNode) {
     return true;
   }
 
-  if(Array.isArray(sourceLN)) {
-    for(i = 0; i < sourceLN.length; ++i) {
-      if(!compareNodes(sourceLN[i], patternLN[i], fragments)) {
-        return false;
-      }
-    }
-    return true;
-  } else if(sourceLN.type) {
-    return compareNodes(sourceLN, patternLN, fragments);
+  if(Array.isArray(sourceListOrNode)) {
+    return compareNodeList(sourceListOrNode, patternListOrNode, fragments);
+  } else if(sourceListOrNode.type) {
+    return compareNodes(sourceListOrNode, patternListOrNode, fragments);
   } else {
-    if(sourceLN === patternLN) {
+    if(sourceListOrNode === patternListOrNode) {
       return true;
     } else {
-      // console.log("Content: " + sourceLN + " != " + patternLN);
+      // console.log("Content: " + sourceListOrNode + " != " + patternListOrNode);
       return false;
     }
   }
@@ -94,7 +97,7 @@ var compareNodes = function(sourceNode, patternNode, fragments) {
 };
 
 var compare = function(source, pattern, fragments) {
-  if(source === null && pattern === null) {
+  if(!source && !pattern) {
     return true;
   }
 
