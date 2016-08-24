@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Git html academy faq</title>
+
+  <link rel="stylesheet" href="./semantic/dist/semantic.min.css">
+  <link rel="stylesheet" href="./css/style.css">
+
+  <script src="./js/main.js"></script>
+</head>
+<body>
+  <div class="ui container">
+    <div class="ui grid one column">
+      <div class="ui row row--setup">
+        <div class="ui column segment raised">
+
+          <h2 class="ui header">Справка по командам git для интенсивов htmlacademy</h2>
+          <p></p>
+
+          <div class="ui grid one column">
+            <div class="ui row">
+              <div class="ui column">
+                <div class="ui input fluid">
+                  <input type="text" name="origin-url" class="js--origin-url" placeholder="Ссылка на форк">
+                </div>
+              </div>
+            </div>
+
+            <div class="ui row" style="display: none;">
+              <div class="ui column">
+                <div class="ui input fluid">
+                  <input type="text" name="upstream-url" class="js--upstream-url" placeholder="Ссылка на чистовик проекта">
+                </div>
+              </div>
+            </div>
+
+            <div class="ui row">
+              <div class="ui column">
+                <div class="ui input fluid">
+                  <input type="text" name="branch-name" class="js--branch-name" placeholder="Имя ветки (из задания)">
+                </div>
+              </div>
+            </div>
+
+            <div class="ui row">
+              <div class="ui column">
+                <div class="ui selection dropdown fluid">
+                  <input type="hidden" name="gf-action" class="js--action">
+                  <i class="dropdown icon"></i>
+                  <div class="default text">Что нужно сделать</div>
+                  <div class="menu">
+                    <div class="item" data-value="clone">Клонировать форк</div>
+                    <div class="item" data-value="link-upstream">Привязать апстрим к локальному каталогу</div>
+                    <div class="item" data-value="list-remotes">Посмотреть полный список привязанных репозитариев</div>
+                    <div class="item" data-value="create-branch">Создать ветку под задание</div>
+                    <div class="item" data-value="checkout-branch">Перейти в другую ветку</div>
+                    <div class="item" data-value="stage-files">Указать, какие файлы нужно закомиттить</div>
+                    <div class="item" data-value="cancel-changes">Отменить изменения в файлах</div>
+                    <div class="item" data-value="commit-staged">Скомиттить добавленные файлы</div>
+                    <div class="item" data-value="commit-all">Скомиттить вообще все изменения</div>
+                    <div class="item" data-value="push-commits">Протолкнуть изменения в форк</div>
+
+                    <div class="item" data-value="pull-request">Создать пулл-реквест</div>
+                    <div class="item" data-value="pull-upstream">Получить изменения из апстрима</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ui row">
+            <div class="ui column" style="margin-top: 20px;">
+              <button class="ui teal button js--submit">
+                Обновить
+              </button>
+            </div>
+          </div>
+
+        </div> <!-- .ui.segment setup form -->
+      </div>
+      <div class="ui row row--display">
+        <div class="ui column segment js--display"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
