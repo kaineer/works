@@ -60,7 +60,8 @@
 	  'commit-staged':   __webpack_require__(31),
 	  'commit-all':      __webpack_require__(32),
 	  'push-commits':    __webpack_require__(33),
-	  'pull-request':    __webpack_require__(34)
+	  'pull-request':    __webpack_require__(34),
+	  'pull-upstream':   __webpack_require__(35)
 	};
 
 	var getFormData = function() {
@@ -16147,9 +16148,31 @@
 
 /***/ },
 /* 34 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	module.exports = function(){return "";};
+	var Handlebars = __webpack_require__(6);
+	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+	module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+	    var stack1, helper, alias1=container.lambda, alias2=container.escapeExpression;
+
+	  return "<h1 id=\"-\">Создать пулл-реквест</h1>\n<ul>\n<li>Пройти по <a href=\"https://github.com/htmlacademy-javascript/"
+	    + alias2(alias1(((stack1 = (depth0 != null ? depth0.project : depth0)) != null ? stack1.name : stack1), depth0))
+	    + "/compare/master..."
+	    + alias2(alias1(((stack1 = (depth0 != null ? depth0.student : depth0)) != null ? stack1.name : stack1), depth0))
+	    + ":"
+	    + alias2(((helper = (helper = helpers.branchName || (depth0 != null ? depth0.branchName : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"branchName","hash":{},"data":data}) : helper)))
+	    + "\">ссылке</a></li>\n<li>Нажать на кнопку <strong>Create pull request</strong></li>\n</ul>\n<h2 id=\"-\">Когда изменения будут приняты</h2>\n<ul>\n<li><a href=\"#pull-upstream\">Втяните изменения в origin</a></li>\n</ul>\n";
+	},"useData":true});
+
+/***/ },
+/* 35 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Handlebars = __webpack_require__(6);
+	function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+	module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+	    return "<h1 id=\"-\">Получаем изменения из чистовика</h1>\n<p>Не забываем <a href=\"#checkout-branch\">перейти в master</a>.</p>\n<pre><code>git checkout master\n</code></pre><p>Получаем изменения из <code>upstream</code></p>\n<pre><code>git pull upstream master\n</code></pre><p>Сохраняем полученные изменения в форк</p>\n<pre><code>git push origin master\n</code></pre>";
+	},"useData":true});
 
 /***/ }
 /******/ ]);
